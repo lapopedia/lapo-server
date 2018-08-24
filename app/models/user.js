@@ -4,7 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     fullname: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+        isEmail: true
+      }  
+    },
     reputation: DataTypes.INTEGER
   }, {});
   User.associate = function(models) {
