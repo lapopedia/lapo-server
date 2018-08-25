@@ -41,5 +41,26 @@ module.exports = {
         status_code: 500
       })
     }
+  },
+  getQuestionsDetails: async (req, res) => {
+    try {
+      model.Question.find({
+        where: {
+          id: req.params.questionId
+        },
+        include: [{ all: true }]
+      }).then((question) => {
+        res.send({
+          status_code: 200,
+          data: question,
+          message: 'Get one question'
+        })
+      })
+    } catch (error) {
+      res.send({
+        message: error,
+        status_code: 500
+      })
+    }
   }
 };
