@@ -34,7 +34,8 @@ module.exports = {
     model.User.find({
       where: {
         id: req.params.userId
-      }
+      },
+      include: [{ model: model.Answer }]
     }).then((user) => {
       res.send({
         status_code: 200,
