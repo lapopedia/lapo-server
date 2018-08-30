@@ -28,7 +28,9 @@ module.exports = {
   getAllQuestions: async (req, res) => {
     try {
       const allQuestions = await model.Question.findAll({
-        include: [{ all: true }]
+        include: [
+          { model: model.Answer, as: 'answers', include: [{ model: model.User, as: 'users_answer' }] }
+        ]
       });
       res.send({
         status_code: 200,
